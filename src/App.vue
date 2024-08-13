@@ -1,33 +1,37 @@
 <template>
-  <h1 v-if="bool" @click="str += '!'">{{ str }}</h1>
-  <h1 v-else @click="str += '!'">{{ str.split('').reverse().join('') }}</h1>
-  <button v-on:click="myFunc" :style="'color:' + color">Reverse</button>
-  <p></p>
-  <input v-model="message" />
+  <form @submit.prevent="add">
+    <input v-model="message" placeholder="todo" />
+  </form>
+  <ul>
+    <li :data-check="el.check" v-for="el of arr" :key="el.id">{{ el.text }} <button @click="check(el.id,1)">✔</button><button  @click="check(el.id,2)">🤢</button></li>
+  </ul>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
-
-const str = ref('Learn vue')
-const bool = ref(true)
-const color = ref('red')
 const message = ref('')
+const arr = ref([] as any[]) 
 
-
-const myFunc = () => {
-  bool.value = !bool.value
-  color.value += 500
-  console.log(message.value)
-  message.value = '' 
+const add = () => {
+  arr.value.push(
+    { text: message.value, id: arr.value.length, check: 0 },
+  )
+  message.value = ''
 }
+
+const check = (id:number, check:number) => {
+  const el = arr.value.find(el=>el.id==id)
+  el.check = check
+}
+
 </script>
 
 <style scoped>
-h1 {
-  user-select: none;
+[data-check="1"] {
+  text-decoration: line-through;
 }
-
-
+[data-check="2"] {
+  background-color: red;
+}
 </style>
