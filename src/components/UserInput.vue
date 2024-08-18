@@ -1,7 +1,8 @@
 <template>
   <input @input="changeName" v-model="name" placeholder="Введите имя пользователя" />
-  {{ name }}
+<p>{{ name }}</p>
 </template>
+
 
 <script setup lang="ts">
 import {ref} from 'vue'
@@ -16,9 +17,13 @@ const changeName = (e:any) => {
   }
   target.value = name
 }
+// name.value = ''
+
+
 
 </script>
 
-<style>
+
+<style scoped>
 
 </style>

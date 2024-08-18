@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps<{ msg: string }>()
+defineProps<{ msg: string }>()//ждем сообщение, которок поместим в h1 {{mas}}
 
 const color = ref(555555)
 const count = ref(0)
