@@ -23,6 +23,7 @@ const add = () => {
   arr.value.push(
     { text: message.value, id: arr.value.length, check: 0 },
   )
+
   localStorage.arr = JSON.stringify(arr.value)
   message.value = '' 
 }
