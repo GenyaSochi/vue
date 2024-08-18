@@ -31,10 +31,10 @@ const add = () => {
 const check = (id:number, check:number) => {
   const el = arr.value.find(el=>el.id==id)
   el.check = check
-  localStorage.arr = JSON.stringify(arr.value)
+  localStorage.arr = JSON.stringify(arr.value) 
 }
-
 </script>
+
 
 <style scoped>
 [data-check="1"] {
