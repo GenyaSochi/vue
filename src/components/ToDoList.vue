@@ -36,12 +36,6 @@ const check = (id:number, check:number) => {
   el.check = check
   localStorage.arr = JSON.stringify(arr.value)   
 }
-
-const del = (id:number, check:number) => {
-  const delMass = arr.value.find(el=>el.id==id)
-  delMass.del = del
-  localStorage.arr != JSON.stringify(arr.value)   
-}
 </script>
 
 
@@ -52,8 +46,4 @@ const del = (id:number, check:number) => {
 [data-check="2"] {
   background-color: red;
 }
-[data-check="3"] {
-  text-transform: none;
-}
-
 </style>
