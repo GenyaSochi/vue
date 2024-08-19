@@ -17,7 +17,7 @@ const changeName = (e:any) => {
   }
   target.value = name
 }
-// name.value = ''
+
 
 
 
