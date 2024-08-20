@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const select = ref('All')
 const message = ref('')
@@ -44,7 +44,12 @@ const check = (id:number, check:number) => {
   localStorage.arr = JSON.stringify(arr.value)   
 }
 
-
+const choice = computed(() =>{
+if(select.value == 'All'){
+  return arr.value
+}else 
+return arr.value.filter((el) => el.text.startsWith(select.value))  
+})
 
 </script>
 

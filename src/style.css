@@ -65,9 +65,6 @@ button:focus-visible {
   text-align: center;
 }
 
-#todo {
- 
-}
 
 @media (prefers-color-scheme: light) {
   :root {
