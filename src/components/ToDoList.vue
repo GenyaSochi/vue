@@ -48,7 +48,7 @@ const choice = computed(() =>{
 if(select.value == 'All'){
   return arr.value
 }else 
-return arr.value.filter((el) => el.text.startsWith(select.value))  
+return arr.value.filter((el) => el.message.startsWith(select.value))  
 })
 
 </script>
