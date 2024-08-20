@@ -1,5 +1,5 @@
 <template>
-  <input @input="changeName" v-model="name" placeholder="Введите имя пользователя" />
+  <input @keyup.enter="changeName" v-model="name" placeholder="Введите имя пользователя" />
 <p>{{ name }}</p>
 </template>
 
@@ -17,10 +17,6 @@ const changeName = (e:any) => {
   }
   target.value = name
 }
-
-
-
-
 </script>
 
 

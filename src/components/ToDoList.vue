@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent="add">
-    <input v-model="message" placeholder="todo" />
-    <button @click="">remove</button>   
+    <input v-model="message" placeholder="todo" />    
   </form>
   <ul>
     <li :data-check="el.check" v-for="el of arr" :key="el.id">{{ el.text }} 
       <span v-if="el.check == 0">
         <button @click="check(el.id,1)">✔</button>
         <button @click="check(el.id,2)">🤢</button>
+        <button @click="remove(message)">remove</button>   
       
       </span>
     </li>
@@ -35,6 +35,10 @@ const check = (id:number, check:number) => {
   const el = arr.value.find(el=>el.id==id) 
   el.check = check
   localStorage.arr = JSON.stringify(arr.value)   
+}
+
+const remove = (message: string) =>{
+
 }
 </script>
 
