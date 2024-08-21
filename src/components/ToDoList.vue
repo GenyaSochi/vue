@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center; gap: 10px;">
     <form @submit.prevent="add">
-      <input style="height: 21px;" v-model="message" placeholder="todo" />    
+      <input style="height: 21px;" v-model="message" type="text" placeholder="todo" />    
     </form>
     <select id="todo" v-model="select">
       <option value="All">Все</option>
@@ -46,11 +46,13 @@ const check = (id:number, check:number) => {
 
 const choice = computed(() =>{
 if(select.value == 'All'){
-  return arr.value
-}else 
-return arr.value.filter((el) => el.message.startsWith(select.value))  
-})
+  return select.value
+}else {
+  arr.value.filter((el) => el.text.startsWith(select.value))
+}
 
+})
+console.log(choice)
 </script>
 
 
