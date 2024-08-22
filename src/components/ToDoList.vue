@@ -1,21 +1,22 @@
 <template>
   <div style="display: flex; justify-content: center; gap: 10px;">
     <form @submit.prevent="add">
-      <input style="height: 21px;" v-model="message" type="text" placeholder="todo" />    
+      <input style="height: 21px;" v-model="message" type="text" placeholder="todo" />
     </form>
+    <input style="height: 21px;" v-model="textSearch" type="text" placeholder="search">
     <select id="todo" v-model="select">
       <option value="All">Все</option>
-      <option value="Completed">Выполненные</option>
-      <option value="Cancelled">Отмененные</option>
-      <option value="Deleted">Удаленные</option>
-    </select>   
+      <option value="1">Выполненные</option>
+      <option value="2">Отмененные</option>
+      <option value="3">Удаленные</option>
+    </select>
   </div>
   <ul>
-    <li :data-check="el.check" v-for="el of arr" :key="el.id">{{ el.text }} 
+    <li :data-check="el.check" v-for="el of compArr" :key="el.id">{{ el.text }}
       <span v-if="el.check == 0">
-        <button @click="check(el.id,1)">✔</button>
-        <button @click="check(el.id,2)">🤢</button>
-        <button @click="check(el.id,3)">remove</button>      
+        <button @click="check(el.id, 1)">✔</button>
+        <button @click="check(el.id, 2)">🤢</button>
+        <button @click="check(el.id, 3)">remove</button>
       </span>
     </li>
   </ul>
@@ -27,30 +28,37 @@ import { computed, ref } from 'vue'
 const select = ref('All')
 const message = ref('')
 const localArr = localStorage.arr ? JSON.parse(localStorage.arr) : []
-const arr = ref(localArr as any[]) 
+const arr = ref(localArr as any[])
+const textSearch = ref('')
 
 const add = () => {
+  if (!message.value) return
   arr.value.push(
     { text: message.value, id: arr.value.length, check: 0 }
   )
-
   localStorage.arr = JSON.stringify(arr.value)
-  message.value = '' 
+  message.value = ''
 }
 
-const check = (id:number, check:number) => {  
-  const el = arr.value.find(el=>el.id==id) 
+const check = (id: number, check: number) => {
+  const el = arr.value.find(el => el.id == id)
   el.check = check
-  localStorage.arr = JSON.stringify(arr.value)   
+  localStorage.arr = JSON.stringify(arr.value)
 }
 
-const choice = computed(() =>{
-if(select.value == 'All'){
-  return select.value
-}
-
+const compArr = computed(() => {
+  if (select.value == 'All') {
+    if (textSearch.value) {
+      return arr.value.filter(el => el.text.includes(textSearch.value))
+    }
+    return arr.value
+  }
+  if (textSearch.value) {
+    return arr.value.filter(el => el.text.includes(textSearch.value) && el.check == parseInt(select.value))
+  }
+  return arr.value.filter(el => el.check == parseInt(select.value))
 })
-console.log(choice)
+
 </script>
 
 
@@ -58,11 +66,12 @@ console.log(choice)
 [data-check="1"] {
   text-decoration: line-through;
 }
+
 [data-check="2"] {
   background-color: red;
 }
+
 [data-check="3"] {
   background-color: green;
 }
-
 </style>
