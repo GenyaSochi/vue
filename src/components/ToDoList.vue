@@ -47,8 +47,6 @@ const check = (id:number, check:number) => {
 const choice = computed(() =>{
 if(select.value == 'All'){
   return select.value
-}else {
-  arr.value.filter((el) => el.text.startsWith(select.value))
 }
 
 })
