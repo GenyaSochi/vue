@@ -4,6 +4,7 @@
       <input style="height: 21px;" v-model="message" type="text" placeholder="todo" />
     </form>
     <input style="height: 21px;" v-model="textSearch" type="text" placeholder="search">
+    <button @click="removeAll">Remove all</button>
     <select id="todo" v-model="select">
       <option value="All">Все</option>
       <option value="1">Выполненные</option>
@@ -30,6 +31,11 @@ const message = ref('')
 const localArr = localStorage.arr ? JSON.parse(localStorage.arr) : []
 const arr = ref(localArr as any[])
 const textSearch = ref('')
+
+const removeAll = ()=>{
+  delete localStorage.arr
+  arr.value = []
+}
 
 const add = () => {
   if (!message.value) return
@@ -60,17 +66,16 @@ const compArr = computed(() => {
 })
 </script>
 
-
 <style scoped>
 [data-check="1"] {
   text-decoration: line-through;
 }
 
 [data-check="2"] {
-  background-color: red;
+  background-color: green;
 }
 
 [data-check="3"] {
-  background-color: green;
+  background-color: red;
 }
 </style>
