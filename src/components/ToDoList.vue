@@ -49,16 +49,15 @@ const check = (id: number, check: number) => {
 const compArr = computed(() => {
   if (select.value == 'All') {
     if (textSearch.value) {
-      return arr.value.filter(el => el.text.includes(textSearch.value))
+      return arr.value.filter(el => el.text.toLowerCase().includes(textSearch.value.toLowerCase()))
     }
     return arr.value
   }
   if (textSearch.value) {
-    return arr.value.filter(el => el.text.includes(textSearch.value) && el.check == parseInt(select.value))
+    return arr.value.filter(el => el.text.toLowerCase().includes(textSearch.value.toLowerCase()) && el.check == parseInt(select.value))
   }
   return arr.value.filter(el => el.check == parseInt(select.value))
 })
-
 </script>
 
 
