@@ -24,7 +24,7 @@ import { computed, ref } from 'vue'
 
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .inform {
   display: flex;
   justify-content: center;
@@ -43,4 +43,4 @@ button {
   background-color: #e1e1e1; 
 }
 
-</style>
+</style> -->
