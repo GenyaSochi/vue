@@ -13,8 +13,7 @@
         <option value="Lesson2">2</option>
         <option value="Lesson3">3</option>
         <option value="Lesson4">4</option>
-        <option value="Lesson5">5</option>
-        <option value="Lesson6">6</option>
+        <option value="Lesson5">5</option>    
       </select>
       <button style="background-color: #e1e1e1; width: 100px; height: 42px;" @click="">Select</button>
     </div>
