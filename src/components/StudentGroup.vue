@@ -7,40 +7,50 @@
         <option value="Group2">Group 2</option>
         <option value="Group3">Group 3</option>
       </select>
+
       <div class="journal2">Lesson:</div>
       <select style="width: 110px; height: 24px;" name="Lesson" text="lessonStudent" id="2" v-model="select1">
         <option value="Lesson1">1</option>
         <option value="Lesson2">2</option>
         <option value="Lesson3">3</option>
         <option value="Lesson4">4</option>
-        <option value="Lesson5">5</option>    
+        <option value="Lesson5">5</option>
       </select>
-      <button style="background-color: #e1e1e1; width: 100px; height: 42px;" @click="">Select</button>
+
+      <button style="background-color: #e1e1e1; width: 100px; height: 42px;" @click="addInfo">Select</button>
     </div>
     <hr>
+
     <div class="journal1">
       <div>Topic:</div>
-      <input style="width: 432px;" type="text" v-model="message" text="massageLesson" placeholder="Lesson topic">
+      <form>
+        <input style="width: 432px;" type="text" v-model="lessonTopic" text="massageLesson" placeholder="Lesson topic">
+      </form>
     </div>
     <div><span>Name</span><span>Is present</span>
     </div>
     <hr>
-    <div>Student 1</div>
-    <label>
-      <input type="checkbox" v-model="checkbox1">
-    </label>
+    <div @submit.prevent="addStudentArr">
+      <div>Student 1
+        <label>
+          <input type="checkbox" v-model="checkbox1" text="present">
+        </label>
+      </div>
+      <hr>
+      <div>Student 2
+        <label>
+          <input type="checkbox" v-model="checkbox2" text="present">
+        </label>
+      </div>
+      <hr>
+      <div>Student 3
+        <label>
+          <input type="checkbox" v-model="checkbox3" text="prersent">
+        </label>
+      </div>
+    </div>
     <hr>
-    <div>Student 2</div>
-    <label>
-      <input type="checkbox" v-model="checkbox2">
-    </label>
-    <hr>
-    <div>Student 3</div>
-    <label>
-      <input type="checkbox" v-model="checkbox3">
-    </label>
-    <hr>
-    <button style="background-color: #e1e1e1; width: 500px; height: 42px;" @click="">Save</button>
+    <button style="background-color: #e1e1e1; width: 500px; height: 42px;" @click="saveInfo">Save</button>
   </div>
 </template>
 
@@ -48,23 +58,35 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const message = ref('JS.Document object model')
 const select = ref('')
 const select1 = ref('')
-const checkbox1 = ref('')
+const lessonTopic = ref('JS.Document object model')
+const checkbox1 = ref('present')
 const checkbox2 = ref('')
 const checkbox3 = ref('')
 const localArr = localStorage.arr ? JSON.parse(localStorage.arr) : []
 const studentArr = ref(localArr as any[])
 
-const addArr = () => {
-  if (!message.value) return
-  studentArr.value.push(
-    {}
-  )
+const addInfo = () => {
+
 }
 
+const saveInfo = () => {
 
+}
+
+const compInfo = computed(() => {
+
+})
+
+const addStudentArr = () => {
+  if (!checkbox1.value || !checkbox2.value || !checkbox3.value) return
+  studentArr.value.push(
+    { select: select.value, select1: select1.value, checkbox1: checkbox1.value }
+  )
+  localStorage.arr = JSON.stringify(studentArr.value)
+  select.value = ''
+}
 
 </script>
 
