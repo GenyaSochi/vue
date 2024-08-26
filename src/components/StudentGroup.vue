@@ -2,14 +2,14 @@
   <div class="journal">
     <div class="journal1">
       <div>Group:</div>
-      <select style="width: 110px; height: 24px;" name="Group" text="groupStudent" id="1" v-model="select">
+      <select style="width: 110px; height: 24px;" name="Group" text="text" v-model="groupSt">
         <option value="Group1">Group 1</option>
         <option value="Group2">Group 2</option>
         <option value="Group3">Group 3</option>
       </select>
 
       <div class="journal2">Lesson:</div>
-      <select style="width: 110px; height: 24px;" name="Lesson" text="lessonStudent" id="2" v-model="select1">
+      <select style="width: 110px; height: 24px;" name="Lesson" text="text1" v-model="lessonSt">
         <option value="Lesson1">1</option>
         <option value="Lesson2">2</option>
         <option value="Lesson3">3</option>
@@ -58,8 +58,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const select = ref('')
-const select1 = ref('')
+const groupSt = ref('')
+const lessonSt = ref('')
 const lessonTopic = ref('JS.Document object model')
 const checkbox1 = ref('present')
 const checkbox2 = ref('')
@@ -82,10 +82,11 @@ const compInfo = computed(() => {
 const addStudentArr = () => {
   if (!checkbox1.value || !checkbox2.value || !checkbox3.value) return
   studentArr.value.push(
-    { select: select.value, select1: select1.value, checkbox1: checkbox1.value }
+    { text: groupSt.value, text1: lessonSt.value}
   )
   localStorage.arr = JSON.stringify(studentArr.value)
-  select.value = ''
+  groupSt.value = ''
+  lessonSt.value = ''
 }
 
 </script>
