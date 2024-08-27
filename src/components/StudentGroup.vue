@@ -79,15 +79,7 @@ const compInfo = computed(() => {
 
 })
 
-const addStudentArr = () => {
-  if (!checkbox1.value || !checkbox2.value || !checkbox3.value) return
-  studentArr.value.push(
-    { text: groupSt.value, text1: lessonSt.value}
-  )
-  localStorage.arr = JSON.stringify(studentArr.value)
-  groupSt.value = ''
-  lessonSt.value = ''
-}
+
 
 </script>
 
