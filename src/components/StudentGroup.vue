@@ -20,7 +20,7 @@
       <div>Topic: {{currentSubject}}</div>
       <form v-if="!currentSubject">
         <input style="width: 432px;" type="text" v-model="lessonTopic" text="massageLesson" placeholder="Lesson topic">
-        <button style="background-color: #e1e1e1; width: 500px; height: 42px;" @click.prevent="saveInfo">Save</button> 
+        <button style="background-color: #e1e1e1; width: 100px; height: 42px;" @click.prevent="saveInfo">Save</button> 
       </form>
     </div>
     <div><span>Name</span><span>Is present</span></div>
@@ -131,8 +131,6 @@ const saveInfo = () => {
   }
   lessonTopic.value = ''
 }
-
-
 </script>
 
 <style scoped>
