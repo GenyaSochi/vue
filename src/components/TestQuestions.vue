@@ -1,7 +1,6 @@
 <template>
   <div>ТЕСТ</div>
-    <input type="radio" name="radio" id="1" v-model="questions">
-    <label for="" ></label>
+    <input type="radio" name="radio" id="1" v-model="questions">    
     <input type="radio" name="radio" id="2" v-model="questions">
   
 
@@ -10,10 +9,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const questions = ref([
-  {}
+const questions = [
+  {order: 1, question: 'Сколько сантиметров в метре?', answer:[100, 200], correctAnswer: 100},
+  {order: 2, question: 'Сколько месяцев в году?', answer:[13, 12], correctAnswer: 12},
+  {order: 3, question: 'Спутник планеты Земля это:?', answer:['Марс', 'Луна'], correctAnswer: 'Луна'}
+]
 
-])
 
 </script>
 
