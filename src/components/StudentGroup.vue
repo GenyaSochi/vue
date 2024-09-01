@@ -1,4 +1,5 @@
 <template>
+<div class="view">
   <div class="journal">
     <div class="journal1">
       <div>Group:</div>
@@ -12,7 +13,7 @@
         <option v-for="el of lessons" :value="el" :key="el">{{el}}</option>
       </select>
 
-      <button style="background-color: #e1e1e1; width: 100px; height: 42px;" @click="addInfo">Select</button>
+      <button style="background-color: #e1e1e1; width: 100px; height: 42px; background-color: gray; border-color: black;" @click="addInfo">Select</button>
     </div>
     <hr>
 
@@ -20,7 +21,7 @@
       <div>Topic: {{currentSubject}}</div>
       <form v-if="!currentSubject">
         <input style="width: 432px;" type="text" v-model="lessonTopic" text="massageLesson" placeholder="Lesson topic">
-        <button style="background-color: #e1e1e1; width: 100px; height: 42px;" @click.prevent="saveInfo">Save</button> 
+        <button style="background-color: #e1e1e1; width: 100px; height: 42px;padding: 10px; margin: 10px; background-color: gray; border-color: black;" @click.prevent="saveInfo">Save</button> 
       </form>
     </div>
     <div><span>Name</span><span>Is present</span></div>
@@ -34,6 +35,7 @@
         <hr>
       </template>    
   </div>
+</div>
 </template>
 
 
@@ -47,13 +49,13 @@ const lessonTopic = ref('')
 
 
 const studentArr = ref([
-  {name:'sdfsdfs1', group:'gr1', id:1},
-  {name:'sdfsdfs3', group:'gr1', id:3},
-  {name:'sdfsdfs6', group:'gr1', id:6},
-  {name:'sdfsdfs2', group:'gr2', id:2},
-  {name:'sdfsdfs7', group:'gr2', id:7},
-  {name:'sdfsdfs4', group:'gr3', id:4},
-  {name:'sdfsdfs5', group:'gr3', id:5},
+  {name:'sdfsdfs1', group:'group1', id:1},
+  {name:'sdfsdfs3', group:'group1', id:3},
+  {name:'sdfsdfs6', group:'group1', id:6},
+  {name:'sdfsdfs2', group:'group2', id:2},
+  {name:'sdfsdfs7', group:'group2', id:7},
+  {name:'sdfsdfs4', group:'group3', id:4},
+  {name:'sdfsdfs5', group:'group3', id:5},
 ])
 const groups = ref([] as string[])
 for (let el of studentArr.value) {
@@ -61,13 +63,13 @@ for (let el of studentArr.value) {
 }
 groups.value.sort((a,b)=>a.localeCompare(b))
 const lessonsArr = ref([
-  {number: 2, group:'gr1', id:1},
-  {number: 3, group:'gr1', id:3},
-  {number: 4, group:'gr1', id:6},
-  {number: 4, group:'gr2', id:2},
-  {number: 5, group:'gr2', id:7},
-  {number: 1, group:'gr3', id:4},
-  {number: 2, group:'gr3', id:5},
+  {number: 2, group:'group1', id:1},
+  {number: 3, group:'group1', id:3},
+  {number: 4, group:'group1', id:6},
+  {number: 4, group:'group2', id:2},
+  {number: 5, group:'group2', id:7},
+  {number: 1, group:'group3', id:4},
+  {number: 2, group:'group3', id:5},
 ])
 const lessons = computed(()=>{
   if (!groupSt.value) return []
@@ -134,6 +136,14 @@ const saveInfo = () => {
 </script>
 
 <style scoped>
+.view {
+  width: 700px;
+  height: 300px;
+  margin-top: 20px;
+  padding-top: 20px;
+  background-color:rgb(223, 216, 216);
+ 
+}
 .journal {
   display: contents;
   width: 600px;
@@ -155,6 +165,6 @@ const saveInfo = () => {
 }
 
 hr {
-  width: 500px;
+  width: 698px;
 }
 </style>

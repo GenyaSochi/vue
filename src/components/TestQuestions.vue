@@ -1,7 +1,7 @@
 <template>
   <div>ТЕСТ</div>
-    <input type="radio" name="radio" id="1" v-model="questions">    
-    <input type="radio" name="radio" id="2" v-model="questions">
+    <input type="radio" name="radio" v-model="questions">    
+    <input type="radio" name="radio" v-model="questions">
   
 
 </template>
