@@ -1,8 +1,18 @@
 <template>
-  <div>ТЕСТ</div>
-    <input type="radio" name="radio" v-model="questions">    
-    <input type="radio" name="radio" v-model="questions">
-  
+  <h4>ТЕСТ</h4>
+  <div class="test">
+    <div v-for="question in questions">Вопрос: {{ question.question }}
+    <div>Выберите один вариант ответа:  {{ question.answers }} 
+      <input type="radio"> 
+      <input type="radio">
+      <input type="radio">
+    </div>
+
+    <button>Добавить ответ</button>
+  </div>
+
+
+  </div>
 
 </template>
 
@@ -10,15 +20,20 @@
 import { computed, ref } from 'vue'
 
 const questions = [
-  {order: 1, question: 'Сколько сантиметров в метре?', answer:[100, 200], correctAnswer: 100},
-  {order: 2, question: 'Сколько месяцев в году?', answer:[13, 12], correctAnswer: 12},
-  {order: 3, question: 'Спутник планеты Земля это:?', answer:['Марс', 'Луна'], correctAnswer: 'Луна'}
+  { question: 'Сколько месяцев в году?', answers: [12 , 13, 3], rightAnswer: 12 },
+  { question: 'Сколько сантиметров в метре?', answers: [100, 35, 200], rightAnswer: 100 },
 ]
+
 
 
 </script>
 
-
 <style scoped>
-
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
 </style>
