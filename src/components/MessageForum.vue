@@ -1,10 +1,6 @@
 <template>
   <form class="form">
     <p class="name"><span>Name</span><span>Time</span></p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-      Dolores, voluptatum quae quod accusantium repudiandae adipisci
-      rem consequuntur eveniet nulla provident, veritatis numquam eaque
-      saepe quasi reiciendis eos mollitia ratione assumenda!</p> 
       <p class="input">Youe name: <input type="text" v-model="youeName" style="width: 696px;"></p>
       <p class="input">Youe message: <input type="text" v-model="yuorMessage" style="width: 674px;"></p>
       <button @click="addSave" style="width: 796px; background-color: darkgray;">Save</button>
@@ -33,6 +29,7 @@ width: 800px;
 height: 400px;
 background-color: #fbf2e9;
 padding: 20px;
+margin: 20px;
 }
 
 .name{
