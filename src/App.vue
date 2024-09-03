@@ -7,6 +7,8 @@
 <StudentGroup></StudentGroup>
 <hr>
 <TestQuestions></TestQuestions>
+<MessageForum></MessageForum>
+
 </template>
 
 <script setup lang="ts">
@@ -17,6 +19,7 @@ import VueCalc from './components/VueCalc.vue'
 // import DelegatedCalc from './components/DelegatedCalc.vue'
 import StudentGroup from './components/StudentGroup.vue';
 import TestQuestions from './components/TestQuestions.vue';
+import MessageForum from './components/MessageForum.vue';
 
 </script>
 

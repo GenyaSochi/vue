@@ -1,54 +1,40 @@
 <template>
   <h4>ТЕСТ</h4>
-  <div style="margin-bottom: 10px;" v-for="variant in variants">{{ variant.question }}
+  <div v-if="num<variants.length" style="margin-bottom: 10px;">
+    {{num+1}}. {{ variants[num].question }}
     <div style="margin-bottom: 10px;">Варианты ответов:</div>
-    <p><input type="radio" name="radio">{{ variant.answer1 }}</p>
-    <br>
-    <p><input type="radio">{{ variant.answer2 }}</p>
+    <template v-for="ans of variants[num].answers" :key="ans">
+      <p><input type="radio" :value="ans" v-model="answer" >{{ ans }}</p>
+    </template>
   </div>
-  <br>
+  <div v-else>Количество правильных ответов: {{ counter }}</div>
 
   <div>
-    <button style="padding: 10px;" @click="addCounter">Ответить</button>
+    <button style="padding: 10px;border-radius: 1px;background-color: darkgray;" @click="addCounter">{{num==(variants.length-1)?'Finish':'Next'}}</button>
   </div>
-  <div>Количество правильных ответов: {{ counter }}</div>
 
 
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 const counter = ref(0)
-
-
-
+const num = ref(0)
+const answer = ref('')
 const variants = [
-  { id: 1, question: 'Сколько сантиметров метре?', answer1: 100, answer2: 200, correctAnswer: 100 },
-  { id: 2, question: 'Сколько месяцев в году?', answer1: 13, answer2: 12, correctAnswer: 12 }
+  { question: 'Сколько сантиметров метре?', answers: ['100', '200'], correctAnswer: '100' },
+  { question: 'Сколько месяцев в году?', answers: ['13', '12'], correctAnswer: '12' }
 ]
+
 const addCounter = () => {
-  counter.value++
+  if(answer.value == variants[num.value].correctAnswer) counter.value++
+  num.value ++
 }
 
-let answer = (answers: any[]) => {
-  answers.join(', ')
-}
 
-const correctAnswer = () => {
-  if (answer = correctAnswer)
-    counter.value += 1
-}
 </script>
 
 
 <style scoped>
-* {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 </style>
