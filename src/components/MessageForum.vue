@@ -1,6 +1,6 @@
 <template>
   <form class="form" @submit.prevent="">
-    <p class="name"><span>Name</span><span>Time{{ date }}</span></p>
+    <p class="name"><span>Name</span><span>{{ date }}</span></p>
     <p class="input">Youe name: <input type="text" :value="yourName" @input="inputYourName" placeholder="Имя"
         style="width: 696px;"></p>
     <p class="input">Youe message: <input type="text" :value="yuorMessage" @input="inputYourMessage"
@@ -29,7 +29,7 @@ const addSave = () => {
 
 const inputYourName = (event: { target: { value: string; }; }) => {
   yourName.value = event.target.value
-  yourName.value.push(newName)
+
 }
 
 const inputYourMessage = (event: { target: { value: string }; }) => {
