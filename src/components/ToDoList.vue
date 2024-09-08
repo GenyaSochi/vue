@@ -32,7 +32,7 @@ const localArr = localStorage.arr ? JSON.parse(localStorage.arr) : []
 const arr = ref(localArr as any[])
 const textSearch = ref('')
 
-const removeAll = ()=>{
+const removeAll = ()=>{ 
   delete localStorage.arr
   arr.value = []
 }
