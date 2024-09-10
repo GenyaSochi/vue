@@ -8,6 +8,7 @@
 <hr>
 <TestQuestions></TestQuestions>
 <MessageForum></MessageForum>
+<TextForm></TextForm>
 
 </template>
 
@@ -20,6 +21,7 @@ import VueCalc from './components/VueCalc.vue'
 import StudentGroup from './components/StudentGroup.vue';
 import TestQuestions from './components/TestQuestions.vue';
 import MessageForum from './components/MessageForum.vue';
+import TextForm from './components/TextForm.vue';
 
 </script>
 

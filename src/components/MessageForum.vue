@@ -5,30 +5,42 @@
     <p class="input">Youe message: <input type="text" v-model="message" placeholder="Сообщение" style="width: 674px;">
     </p>
     <button @click="addSave" style="width: 100%; border: green solid 2px;">Отправить сообщение</button>
-    <p>{{ name.toLocaleUpperCase() }}</p>
-    <p>{{ message.toLocaleLowerCase() }}</p>
-    <p class="mess"><span class="sms">Сообщение доставлено:</span> {{ delivery }}</p>
-    <p style="font-weight: lighter;">Время доставки сообщения: {{ date }}</p>
-    <button @click="deleteMess" style="border: red solid 2px;">Удалить сообщение</button>
+    <div v-for="el of arr" :key="el.uuid">
+      <p>{{ el.name.toLocaleUpperCase() }}</p>
+      <p>{{ el.message.toLocaleLowerCase() }}</p>
+      <p class="mess"><span class="sms">Сообщение доставлено:</span> {{ el.time }}</p>
+      <button @click="deleteMess(el.uuid)" style="border: red solid 2px;">Удалить сообщение</button>
+    </div>
 
   </form>
 </template>
 
 <script setup lang="ts">
 
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import {v4} from 'uuid'
 
-let date = new Date().toLocaleString()
+const date = ref(new Date().toLocaleString())
 const name = ref('')
 const message = ref('')
-const delivery = ref('')
+
+let timer:number
+
+onMounted(()=>{
+  timer = setInterval(()=>{date.value=new Date().toLocaleString()},1000)
+})
+onBeforeUnmount(()=>{
+  clearInterval(timer)
+})
 
 const newMessage = localStorage.arr ? JSON.parse(localStorage.arr) : [] as Chat[]
-const arr = ref(newMessage as any[])
+const arr = ref(newMessage as Chat[])
 
 type Chat = {
-  name: any[''],
-  message: any[''],
+  uuid: string,
+  name:string,
+  message:string,
+  time: string,
 }
 
 const addSave = () => {
@@ -38,25 +50,25 @@ const addSave = () => {
     alert('Введите имя')
   }else {
     arr.value.push({
-      name: name.value, message: message.value
+      name: name.value, message: message.value, time:new Date().toLocaleString(), uuid:v4()
     })
     localStorage.arr = JSON.stringify(arr.value)
   }
-  delivery.value = message.value
-}
-
-const deleteMess = () => {
   name.value = ''
   message.value = ''
-  delivery.value = ''
+}
 
+const deleteMess = (uuid:string) => {
+  const i = arr.value.findIndex(el=>el.uuid==uuid)
+  console.log(i)
+  if (i!=-1) arr.value.splice(i,1)
+  localStorage.arr = JSON.stringify(arr.value)
 }
 </script>
 
 <style scoped>
 .form {
   width: 800px;
-  height: 400px;
   background-color: #fbf2e9;
   padding: 20px;
   margin: 20px;
