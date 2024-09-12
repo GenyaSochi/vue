@@ -24,7 +24,7 @@ const date = ref(new Date().toLocaleString())
 const name = ref('')
 const message = ref('')
 
-let timer:number
+let timer:any
 
 onMounted(()=>{
   timer = setInterval(()=>{date.value=new Date().toLocaleString()},1000)
