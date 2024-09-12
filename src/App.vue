@@ -1,4 +1,8 @@
 <template>
+<RouterLink to="/">Home</RouterLink>
+<RouterLink to="/about">About</RouterLink>
+<RouterView></RouterView>
+
 <ToDoList></ToDoList>
 <!-- <UserInput></UserInput> -->
 <HeaderComponent></HeaderComponent>
@@ -9,6 +13,7 @@
 <TestQuestions></TestQuestions>
 <MessageForum></MessageForum>
 <TextForm></TextForm>
+
 
 </template>
 
