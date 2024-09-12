@@ -1,6 +1,7 @@
 <template>
 <RouterLink to="/">Home</RouterLink>
 <RouterLink to="/about">About</RouterLink>
+<RouterLink to="/main">MainPage</RouterLink>
 <RouterView></RouterView>
 
 <ToDoList></ToDoList>
@@ -18,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import ToDoList from './components/ToDoList.vue'
+import ToDoList from '#root/components/ToDoList.vue'
 // import UserInput from './components/UserInput.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 import VueCalc from './components/VueCalc.vue'
