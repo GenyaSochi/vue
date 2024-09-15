@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import test from 'node:test';
+
 import { ref } from 'vue'
 
 const bold = ref('')
@@ -38,7 +38,7 @@ const addText = ()=>{
     arr.value.push({
       text: message.value
     })
-    localStorage.arr = JSON.stringify(arr.value)
+    message.value = 'dlld'
   }
 }
 
