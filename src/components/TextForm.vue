@@ -38,6 +38,7 @@ const addText = ()=>{
     arr.value.push({
       text: message.value
     })
+    localStorage.arr = JSON.stringify(arr.value)
   }
 }
 
