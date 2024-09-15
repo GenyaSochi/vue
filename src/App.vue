@@ -1,5 +1,5 @@
 <template>
-<RouterLink to="/">Home</RouterLink>
+<RouterLink class="view" to="/">Home</RouterLink>
 <RouterLink to="/about">About</RouterLink>
 <RouterLink to="/main">MainPage</RouterLink>
 <RouterView></RouterView>
@@ -30,4 +30,8 @@ import MessageForum from './components/MessageForum.vue';
 import TextForm from './components/TextForm.vue';
 
 </script>
+
+<style scoped>
+
+</style>
 

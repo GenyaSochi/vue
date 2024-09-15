@@ -1,5 +1,6 @@
 <template>
   <h1>MainPage</h1>
+
     
   </template>
   
@@ -8,7 +9,6 @@
   </script>
   
   <style scoped>
-  
-  
+
   
   </style>

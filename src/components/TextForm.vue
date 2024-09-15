@@ -20,18 +20,14 @@
 
 <style scoped>
 .box {
-  background-color: rgb(250, 214, 168);
+  background-color: rgb(190, 245, 199);
   width: 840px;
   height: 400px;
   margin: 20px;
-
-
-  border: 1px solid black;
+  border: 1px solid rgb(177, 172, 172);
 }
 .show {
   margin: 20px;
-  
+  color: red;  
 }
-
-
 </style>
