@@ -1,6 +1,6 @@
 <template>
-<RouterLink class="view" to="/">Home</RouterLink>
-<RouterLink to="/about">About</RouterLink>
+<RouterLink class="view" to="/">Home</RouterLink><br>
+<RouterLink to="/about">About</RouterLink><br>
 <RouterLink to="/main">MainPage</RouterLink>
 <RouterView></RouterView>
 
