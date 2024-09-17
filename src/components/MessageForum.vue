@@ -68,7 +68,6 @@ const deleteMess = (uuid:string) => {
 
 <style scoped>
 .form {
-  width: 800px;
   background-color: #fbf2e9;
   padding: 20px;
   margin: 20px;

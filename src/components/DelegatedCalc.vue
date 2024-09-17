@@ -1,6 +1,6 @@
 <template>
   <div ref="calc">
-    <div style="margin:0 0 10px 20px">
+    <div style="margin:0 0 10px 20px" >
       <div style="font-size: 10px; height:12px; text-align: left;">{{ calcStr }}</div>
       <div style="font-size: 18px; height:20px; text-align: left;">{{ calcCurrentStr }}</div>
     </div>

@@ -1,48 +1,55 @@
 <template>
   <div class="box">
-    <input type="checkbox" value="bold" name="fontStyle" v-model="bold" style="font-weight: bold;" ">{{ styleText }}<span>Bold</span>
-    <input type="checkbox" value="underline" name="fontStyle" v-model="underline" style="text-decoration: underline;"><span>Underline</span>
-    <input type="checkbox" value="italics" name="fontStyle" v-model="italics" style="font-style: italic;"><span>Italics</span>
-    <input type="radio" value="left" name="fontStyle" v-model="left" style="text-align: left;"><span>Left</span>
-    <input type="radio" value="right" name="fontStyle" v-model="right" style="text-align: right;"><span>Right</span>
-    <input type="radio" value="jastify" name="fontStyle" v-model="jastify" style="text-align: justify;"><span>Jastify</span>
-
-    <input style="width: 600px; height: 200px;" type="text" v-model="text">
+    <input type="checkbox" value="font-weight: bold;" v-model="font"><span>Bold</span>
+    <input type="checkbox" value="text-decoration: underline;" v-model="font"><span>Underline</span>
+    <input type="checkbox" value="font-style: italic;"  v-model="font"><span>Italics</span>
+    <input type="radio" value="text-align: left;" v-model="align"><span>Left</span>
+    <input type="radio" value="text-align: right;" v-model="align"><span>Right</span>
+    <input type="radio" value="text-align: justify;" v-model="align"><span>Jastify</span>
+    <textarea :style="'width: 90%; height: 200px; resize:none'+font.join('')+align" type="text" v-model="text"></textarea>
     <div>
-      <button class="show">Show text</button>
+      <button @click="addText" class="show">Show text</button>
+     
     </div>
   </div>
+  <div v-for="el of arr" :key="el.text" :style="el.style">{{ el.text }}</div>
+  
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const bold = ref('')
-const underline = ref('')
-const italics = ref('')
-const left = ref('')
-const right = ref('')
-const jastify = ref('')
+const font = ref([])
+const align = ref('')
 const text = ref('')
-const styleText = ref('')
 
+const texts = localStorage.textArr ? JSON.parse(localStorage.textArr) : [] as newText[]
+const arr = ref(texts as newText[])
 
-const localArr = localStorage.arr ? JSON.parse(localStorage.arr) : []
-const arr = ref(localArr as any[])
+type newText = {
+  text: string,
+  style: string,
+}
 
-
-
-
-
-
+const addText = ()=>{
+  if(!text.value){
+    alert('Введите текст')
+  }else {
+    arr.value.push({
+      text: text.value, style: font.value.join('') + align.value
+    })
+  }
+  localStorage.textArr = JSON.stringify(arr.value)
+  text.value = ''
+  align.value = ''
+  font.value = []
+}
 
 </script>
 
 <style scoped>
 .box {
-  background-color: #f8f3ea;
-  width: 840px;
-  height: 400px;
+  background-color: #f8f3ea; 
   margin: 20px;
   border: 1px solid rgb(177, 172, 172);
 }
