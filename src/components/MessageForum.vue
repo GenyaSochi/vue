@@ -1,8 +1,8 @@
 <template>
   <form class="form" @submit.prevent="">
     <p class="name"><span>Chat</span><span>{{ date }}</span></p>
-    <p class="input">Youe name: <input type="text" v-model="name" placeholder="Имя" style="width: 696px; "></p>
-    <p class="input">Youe message: <input type="text" v-model="message" placeholder="Сообщение" style="width: 674px;">
+    <p class="input">Youe name: <input type="text" v-model="name" placeholder="Имя" style="width: 70%; "></p>
+    <p class="input">Youe message: <input type="text" v-model="message" placeholder="Сообщение" style="width: 68%;">
     </p>
     <button @click="addSave" style="width: 100%; border: green solid 2px;">Отправить сообщение</button>
     <div v-for="el of arr" :key="el.uuid">

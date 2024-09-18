@@ -14,6 +14,7 @@
 <TestQuestions></TestQuestions>
 <MessageForum></MessageForum>
 <TextForm></TextForm>
+<PlaceTrain></PlaceTrain>
 
 
 </template>
@@ -28,6 +29,7 @@ import StudentGroup from './components/StudentGroup.vue';
 import TestQuestions from './components/TestQuestions.vue';
 import MessageForum from './components/MessageForum.vue';
 import TextForm from './components/TextForm.vue';
+import PlaceTrain from './components/PlaceTrain.vue';
 
 </script>
 
