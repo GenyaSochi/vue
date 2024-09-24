@@ -9,7 +9,7 @@
       <option>Казань-Иркутск</option>
     </select>
     <label for="trainDate" style="padding: 0 12px;">Date:</label>
-    <input type="date" id="trainDate" value="newDate" v-model="choiceDate" style="margin-right: 40px;">
+    <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <button @click="addTiket" style="width: 100px; border: 2px solid black;">Search</button>
     <hr style="width: 90%;">
 
