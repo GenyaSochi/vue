@@ -1,8 +1,9 @@
 <template>
+
   <div
     style="background-color: gainsboro; padding-top: 20px;border: 1px solid gray; margin: 20px 60px; border-radius: 4px;">
     <span style="padding-right: 10px;">Direction:</span>
-    <select style="width: 220px;" v-model="directions">
+    <select style="width: 220px;" v-model="direction">
       <option>Москва-Сочи</option>
       <option>Екатеринбург-Новосибирск</option>
       <option>Казань-Иркутск</option>
@@ -48,43 +49,64 @@
         <input type="checkbox" id="28" style="width: 18px;">28
       </p>
     </div>
-  </div>
+    <table>
+      <tr>
+        <th>Direction</th>
+        <th>Date</th>
+        <th>Seat</th>
+      </tr>
+      <tr>
+        <td>{{ direction }}</td>
+        <td>{{ choiceDate }}</td>
+        <td>{{ seat }}</td>
+      </tr>
+    </table>
+    <label for="trainDate">Total price: {{ cost }}</label>
+  </div>  
+
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const directions = ref('')
+const direction = ref('')
 const choiceDate = ref('')
-const cost = ref('')
+const seat = ref('')
+const cost = ref('124$')
 
 
-
-
-const tikets = localStorage.textArr ? JSON.parse(localStorage.textArr) : [] as BuyTiket[]
-const arr = ref(tikets as BuyTiket[])
+const tiket = localStorage.textArr ? JSON.parse(localStorage.textArr) : [] as BuyTiket[]
+const arr = ref(tiket as BuyTiket[])
 
 type BuyTiket = {
-  direction: string,
-  cost: any,
-  date: any,
- 
+  seat: any,
 }
 
-const tiket = ref([] as BuyTiket[])
 
-const addTiket = ()=>{
- 
+// const addTiket = () => {
+//   if (!direction.value || !choiceDate.value) {
+//     alert('Не хватает данных для покупки')
+//   } else {
+//     arr.value.push({
+//       direction: direction.value, choiceDate: choiceDate.value, place: place.value
+//     })
+//     localStorage.textArr = JSON.stringify(arr.value)
+//   }  
+// }
+
+
+const addTiket = () => {
+  if (!direction.value || !choiceDate.value) {
+    alert('Не хватает данных для покупки')
+  } else {
     arr.value.push({
-      cost: cost.value, direction: directions.value, date: choiceDate.value, 
+      seat: seat.value
     })
     localStorage.textArr = JSON.stringify(arr.value)
-  }
-
-</script>
-<style scoped>
-.place {
-  border: 1px solid gray;
-
+  }  
+  seat.value = ''
 }
-</style>
+</script>
+
+
+<style scoped></style>
