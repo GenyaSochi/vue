@@ -86,7 +86,7 @@ const addTicket = () => {
 }
 
 const totalTicket = () =>{
-cost1.value = cost.value * seat.value
+cost1.value = cost.value * 100
 }
 
 </script>
