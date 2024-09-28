@@ -5,12 +5,11 @@
     <span style="padding-right: 10px;">Direction:</span>
     <select style="width: 220px;" v-model="direction">
       <option>Москва-Сочи</option>
-      <option>Екатеринбург-Новосибирск</option>
-      <option>Казань-Иркутск</option>
     </select>
+   
+    
     <label for="trainDate" style="padding: 0 12px;">Date:</label>
-    <input type="date" v-model="choiceDate" style="margin-right: 40px;">
-    <button @click="search" style="width: 100px; border: 2px solid black;">Search</button>
+    <input type="date" v-model="choiceDate" style="margin-right: 40px;">  
     <hr style="width: 90%;">
     
     <div>
@@ -41,8 +40,10 @@
         <td>{{ seat.toString() }}</td>
       </tr>
     </table>
-    <label for="trainDate">Total price: {{ cost }}</label>
-    <button @click="addTiket" style="width: 100px; border: 2px solid black;">Book</button>
+    <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
+    <label>Total price: {{ cost + '$' }} </label>
+    <hr>
+    <span >Buy Ticket</span>
   </div>
 
 </template>
@@ -53,23 +54,24 @@ import { ref } from 'vue'
 const direction = ref('')
 const choiceDate = ref('')
 const seat = ref([])
-const cost = ref('124$')
+const cost = ref(0)
+const cost1 = ref(0)
 
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
 const arr = ref(tikets as any)
 
-type BuyTiket = {
-  seat: any,
-  direction: string,
-  choiceDate: number,
+// type BuyTicket = {
+//   seat: any,
+//   direction: string,
+//   choiceDate: number,
+// }
+
+type direction = {
+  newDirection: string,
 }
 
-const search = () => {
-  
-}
-
-const addTiket = () => {
+const addTicket = () => {
   if (!direction.value || !choiceDate.value) {
     alert('Не хватает данных для покупки')
   } else {
@@ -82,6 +84,11 @@ const addTiket = () => {
   }
   seat.value = []
 }
+
+const totalTicket = () =>{
+cost1.value = cost.value * seat.value
+}
+
 </script>
 
 
