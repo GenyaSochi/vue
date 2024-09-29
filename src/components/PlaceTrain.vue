@@ -48,7 +48,7 @@
       <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
    
     <hr>
-    <span v-bind="BuyTicket">Buy Ticket:</span>
+    <span>Buy Ticket:</span>
   </div>
 
 </template>
