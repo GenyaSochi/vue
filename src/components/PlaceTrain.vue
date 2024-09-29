@@ -6,25 +6,27 @@
     <select style="width: 220px;" v-model="direction">
       <option>Москва-Сочи</option>
     </select>
-   
-    
+
+
     <label for="trainDate" style="padding: 0 12px;">Date:</label>
-    <input type="date" v-model="choiceDate" style="margin-right: 40px;">  
+    <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
-    
+
     <div>
       <p>
         <template v-for="i of 28" :key="i">
-          <input v-if="i%2!=0" type="checkbox" :disabled="tikets[direction+'/'+choiceDate]?.includes(i)" :value="i" v-model="seat" style="width: 20px;">
-          <span v-if="i%2!=0">{{ i }}</span>
+          <input v-if="i % 2 != 0" type="checkbox" :disabled="tikets[direction + '/' + choiceDate]?.includes(i)" :value="i"
+            v-model="seat" style="width: 20px;">
+          <span v-if="i % 2 != 0">{{ i }}</span>
         </template>
       </p>
     </div>
     <div>
       <p>
         <template v-for="i of 28" :key="i">
-          <input v-if="i%2==0" type="checkbox" :disabled="tikets[direction+'/'+choiceDate]?.includes(i)" :value="i" v-model="seat" style="width: 20px;">
-          <span v-if="i%2==0">{{ i }}</span>
+          <input v-if="i % 2 == 0" type="checkbox" :disabled="tikets[direction + '/' + choiceDate]?.includes(i)" :value="i"
+            v-model="seat" style="width: 20px;">
+          <span v-if="i % 2 == 0">{{ i }}</span>
         </template>
       </p>
     </div>
@@ -40,10 +42,13 @@
         <td>{{ seat.toString() }}</td>
       </tr>
     </table>
-    <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
-    <label>Total price: {{ cost + '$' }} </label>
+
+      <button @click="addCost" style="width: 100px; border: 2px solid black;">Cost</button>
+      <label>Total price: {{ cost + '$' }} </label><br>
+      <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
+   
     <hr>
-    <span >Buy Ticket</span>
+    <span v-bind="BuyTicket">Buy Ticket:</span>
   </div>
 
 </template>
@@ -54,8 +59,8 @@ import { ref } from 'vue'
 const direction = ref('')
 const choiceDate = ref('')
 const seat = ref([])
-const cost = ref(0)
-const cost1 = ref(0)
+const costSeat = ref(124)
+const cost = ref()
 
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
@@ -75,18 +80,18 @@ const addTicket = () => {
   if (!direction.value || !choiceDate.value) {
     alert('Не хватает данных для покупки')
   } else {
-    if (!tikets[direction.value+'/'+choiceDate.value]) {
-      tikets[direction.value+'/'+choiceDate.value] = seat.value
+    if (!tikets[direction.value + '/' + choiceDate.value]) {
+      tikets[direction.value + '/' + choiceDate.value] = seat.value
     } else {
-      tikets[direction.value+'/'+choiceDate.value] = [...tikets[direction.value+'/'+choiceDate.value], ...seat.value]
+      tikets[direction.value + '/' + choiceDate.value] = [...tikets[direction.value + '/' + choiceDate.value], ...seat.value]
     }
     localStorage.tikets = JSON.stringify(arr.value)
   }
   seat.value = []
 }
 
-const totalTicket = () =>{
-cost1.value = cost.value * 100
+const addCost = () => {
+  cost.value = costSeat.value * seat.value.length
 }
 
 </script>
