@@ -61,11 +61,11 @@ const cost1 = ref(0)
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
 const arr = ref(tikets as any)
 
-// type BuyTicket = {
-//   seat: any,
-//   direction: string,
-//   choiceDate: number,
-// }
+type BuyTicket = {
+  seat: any,
+  direction: string,
+  choiceDate: number,
+}
 
 type direction = {
   newDirection: string,
