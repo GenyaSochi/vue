@@ -4,15 +4,14 @@
     style="background-color: gainsboro; padding-top: 20px;border: 1px solid gray; margin: 20px 60px; border-radius: 4px;">
     <span style="padding-right: 10px;">Direction:</span>
     <select style="width: 220px;" v-model="direction">
-      <option>Москва-Сочи</option>
+      <option v-for="val of directions" :key="val" :value="val">{{val}}</option>
     </select>
-
 
     <label for="trainDate" style="padding: 0 12px;">Date:</label>
     <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
 
-    <div>
+    <div v-if="schedule[direction]?.includes(choiceDate)">
       <p>
         <template v-for="i of 28" :key="i">
           <input v-if="i % 2 != 0" type="checkbox" :disabled="tikets[direction + '/' + choiceDate]?.includes(i)"
@@ -20,8 +19,6 @@
           <span v-if="i % 2 != 0">{{ i }}</span>
         </template>
       </p>
-    </div>
-    <div>
       <p>
         <template v-for="i of 28" :key="i">
           <input v-if="i % 2 == 0" type="checkbox" :disabled="tikets[direction + '/' + choiceDate]?.includes(i)"
@@ -29,6 +26,9 @@
           <span v-if="i % 2 == 0">{{ i }}</span>
         </template>
       </p>
+    </div>
+    <div v-else>
+      На выбранную дату нет поездов
     </div>
     <table>
       <tr>
@@ -43,39 +43,52 @@
       </tr>
     </table>
 
-    <button @click="addCost" style="width: 100px; border: 2px solid black;">Cost</button>
     <label>Total price: {{ cost + '$' }} </label><br>
     <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
 
 
     <hr>
-    <div v-if="">Buy Ticket: <span></span></div>
+  </div>
+  <div>
+    <h3>Buy Tickets</h3>
+    <table>
+      <tbody>
+        <tr v-for="val, key in arr" :key="key">
+          <td>{{ key.toString().split('/')[0] }}</td>
+          <td>{{ key.toString().split('/')[1] }}</td>
+          <td>{{ val.toString() }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
   </div>
 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const direction = ref('')
-const choiceDate = ref('')
+const schedule = {
+  'Москва-Сочи':['2024-10-02',],
+  'Сочи-Москва':['2024-10-02',],
+} as Record<string,string[]>
+
+const wagons = {
+  'Москва-Сочи':[{num:1, type:'platzcart'}],
+} as Record<string,any[]>
+
+const directions = Object.keys(schedule) as string[]
+
+const direction = ref(directions[0])
+const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
-const costSeat = ref(124)
-const cost = ref()
-
+const costSeat = 124
+const cost = computed(()=>{
+  return costSeat * seat.value.length
+})
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
 const arr = ref(tikets as any)
-
-type BuyTicket = {
-  seat: any,
-  direction: string,
-  choiceDate: number,
-}
-
-type direction = {
-  newDirection: string,
-}
 
 const addTicket = () => {
   if (!direction.value || !choiceDate.value) {
@@ -91,10 +104,6 @@ const addTicket = () => {
   seat.value = []
   direction.value = ''
   choiceDate.value = ''
-}
-
-const addCost = () => {
-  cost.value = costSeat.value * seat.value.length
 }
 
 </script>
