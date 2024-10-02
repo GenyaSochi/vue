@@ -4,7 +4,7 @@
     style="background-color: gainsboro; padding-top: 20px;border: 1px solid gray; margin: 20px 60px; border-radius: 4px;">
     <span style="padding-right: 10px;">Direction:</span>
     <select style="width: 220px;" v-model="direction">
-      <option v-for="val of directions" :key="val" :value="val">{{val}}</option>
+      <option v-for="val of directions" :key="val" :value="val">{{ val }}</option>
     </select>
 
     <label for="trainDate" style="padding: 0 12px;">Date:</label>
@@ -28,13 +28,16 @@
       </p>
     </div>
     <div v-else>
-      На выбранную дату нет поездов
+      <span>На выбранную дату нет поездов</span>
     </div>
+
+    <div v-if="wagons"></div>
+
     <table>
       <tr>
-        <th>Direction</th>
-        <th>Date</th>
-        <th>Seat</th>
+        <th class="booking ">Direction</th>
+        <th class="booking ">Date</th>
+        <th class="booking ">Seat</th>
       </tr>
       <tr>
         <td>{{ direction }}</td>
@@ -45,22 +48,28 @@
 
     <label>Total price: {{ cost + '$' }} </label><br>
     <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
-
-
     <hr>
-  </div>
-  <div>
-    <h3>Buy Tickets</h3>
-    <table>
-      <tbody>
-        <tr v-for="val, key in arr" :key="key">
-          <td>{{ key.toString().split('/')[0] }}</td>
-          <td>{{ key.toString().split('/')[1] }}</td>
-          <td>{{ val.toString() }}</td>
-        </tr>
-      </tbody>
-    </table>
-    
+
+
+    <div>
+      <h3>Buy Tickets</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th class="booking">Direction</th>
+            <th class="booking">Date</th>
+            <th class="booking">Seat</th>
+          </tr>
+          <tr v-for="val, key in arr" :key="key">
+            <td class="buy">{{ key.toString().split('/')[0] }}</td>
+            <td class="buy">{{ key.toString().split('/')[1] }}</td>
+            <td class="buy">{{ val.toString() }}</td>
+            <span v-if="val == ''">{{ 'Билет без места' }}</span>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
   </div>
 
 </template>
@@ -69,13 +78,18 @@
 import { ref, computed } from 'vue'
 
 const schedule = {
-  'Москва-Сочи':['2024-10-02',],
-  'Сочи-Москва':['2024-10-02',],
-} as Record<string,string[]>
+  'Москва-Сочи': ['2024-10-02', '2024-10-04', '2024-10-06'],
+  'Сочи-Москва': ['2024-10-02', '2024-10-04', '2024-10-06'],
+  'Екатеринбург-Уфа': ['2024-10-03', '2024-10-05', '2024-10-07'],
+  'Уфа-Екатеринбург': ['2024-10-03','2024-10-05', '2024-10-07'],
+} as Record<string, string[]>
 
 const wagons = {
-  'Москва-Сочи':[{num:1, type:'platzcart'}],
-} as Record<string,any[]>
+  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+} as Record<string, any[]>
 
 const directions = Object.keys(schedule) as string[]
 
@@ -83,7 +97,7 @@ const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
 const costSeat = 124
-const cost = computed(()=>{
+const cost = computed(() => {
   return costSeat * seat.value.length
 })
 
@@ -109,4 +123,9 @@ const addTicket = () => {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+.booking,
+.buy {
+  padding: 0 20px;
+}
+</style>
