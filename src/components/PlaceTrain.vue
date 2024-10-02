@@ -5,24 +5,23 @@
     <span style="padding-right: 10px;">Direction:</span>
     <select style="width: 220px;" v-model="direction">
       <option v-for="val of directions" :key="val" :value="val">{{ val }}</option>
-    </select>
-
+    </select>    
     <label for="trainDate" style="padding: 0 12px;">Date:</label>
     <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
-
+    
     <div v-if="schedule[direction]?.includes(choiceDate)">
       <p>
         <template v-for="i of 28" :key="i">
           <input v-if="i % 2 != 0" type="checkbox" :disabled="tikets[direction + '/' + choiceDate]?.includes(i)"
-            :value="i" v-model="seat" style="width: 20px;">
+          :value="i" v-model="seat" style="width: 20px;">
           <span v-if="i % 2 != 0">{{ i }}</span>
         </template>
       </p>
       <p>
         <template v-for="i of 28" :key="i">
           <input v-if="i % 2 == 0" type="checkbox" :disabled="tikets[direction + '/' + choiceDate]?.includes(i)"
-            :value="i" v-model="seat" style="width: 20px;">
+          :value="i" v-model="seat" style="width: 20px;">
           <span v-if="i % 2 == 0">{{ i }}</span>
         </template>
       </p>
@@ -30,9 +29,12 @@
     <div v-else>
       <span>На выбранную дату нет поездов</span>
     </div>
-
-    <div v-if="wagons"></div>
-
+    
+    <p>
+      <input type="checkbox">Плацкарт
+      <input type="checkbox">Купе
+    </p>
+   
     <table>
       <tr>
         <th class="booking ">Direction</th>
@@ -63,8 +65,7 @@
           <tr v-for="val, key in arr" :key="key">
             <td class="buy">{{ key.toString().split('/')[0] }}</td>
             <td class="buy">{{ key.toString().split('/')[1] }}</td>
-            <td class="buy">{{ val.toString() }}</td>
-            <span v-if="val == ''">{{ 'Билет без места' }}</span>
+            <td class="buy">{{ val.toString() }}</td>            
           </tr>
         </tbody>
       </table>
@@ -85,10 +86,10 @@ const schedule = {
 } as Record<string, string[]>
 
 const wagons = {
-  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
-  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
-  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
-  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
 } as Record<string, any[]>
 
 const directions = Object.keys(schedule) as string[]
@@ -96,9 +97,13 @@ const directions = Object.keys(schedule) as string[]
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
-const costSeat = 124
+const costPlatzcart = 100
+const costCupe = 124
 const cost = computed(() => {
-  return costSeat * seat.value.length
+  if(costPlatzcart){
+    return costPlatzcart * seat.value.length 
+  }else(costCupe)
+    return costCupe * seat.value.length  
 })
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
