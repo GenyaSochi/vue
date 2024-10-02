@@ -69,7 +69,6 @@
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 
@@ -86,10 +85,10 @@ const schedule = {
 } as Record<string, string[]>
 
 const wagons = {
-  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
-  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
-  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
-  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
 } as Record<string, any[]>
 
 const directions = Object.keys(schedule) as string[]
@@ -97,13 +96,9 @@ const directions = Object.keys(schedule) as string[]
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
-const costPlatzcart = 100
-const costCupe = 124
+const costSeat = 124
 const cost = computed(() => {
-  if(costPlatzcart){
-    return costPlatzcart * seat.value.length 
-  }else(costCupe)
-    return costCupe * seat.value.length  
+  return costSeat * seat.value.length
 })
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
