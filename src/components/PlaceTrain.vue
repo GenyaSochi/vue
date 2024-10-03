@@ -35,7 +35,7 @@
       <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
     </p>
     
->>>>>>> 5088744d66062da7c84f204758abf588f98ad0c0
+
     <table>
       <tbody>
 
