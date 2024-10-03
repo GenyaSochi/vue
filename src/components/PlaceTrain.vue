@@ -66,7 +66,7 @@
             <th class="booking">Seat</th>
           </tr>
           <tr v-for="val, key in arr" :key="key">
-            <td class="bu">{{ key.toString().split('/')[0] }}</td>
+            <td class="buy">{{ key.toString().split('/')[0] }}</td>
             <td class="buy">{{ key.toString().split('/')[1] }}</td>
             <td class="buy">{{ val.toString() }}</td>            
           </tr>
