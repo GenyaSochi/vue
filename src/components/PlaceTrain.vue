@@ -31,21 +31,31 @@
     </div>
 
     <p>
+<<<<<<< HEAD
       <input type="checkbox" v-model="platzcart">Плацкарт
       <input type="checkbox" v-model="cupe">Купе
     </p>
 
+=======
+      <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт</label>
+      <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
+    </p>
+    
+>>>>>>> 5088744d66062da7c84f204758abf588f98ad0c0
     <table>
-      <tr>
-        <th class="booking ">Direction</th>
-        <th class="booking ">Date</th>
-        <th class="booking ">Seat</th>
-      </tr>
-      <tr>
-        <td>{{ direction }}</td>
-        <td>{{ choiceDate }}</td>
-        <td>{{ seat.toString() }}</td>
-      </tr>
+      <tbody>
+
+        <tr>
+          <th class="booking ">Direction</th>
+          <th class="booking ">Date</th>
+          <th class="booking ">Seat</th>
+        </tr>
+        <tr>
+          <td>{{ direction }}</td>
+          <td>{{ choiceDate }}</td>
+          <td>{{ seat.toString() }}</td>
+        </tr>
+      </tbody>
     </table>
 
     <label>Total price: {{ cost + '$' }} </label><br>
@@ -93,6 +103,7 @@ const wagons = {
 
 const directions = Object.keys(schedule) as string[]
 
+const vagonType = ref('')
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
