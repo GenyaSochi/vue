@@ -31,21 +31,24 @@
     </div>
     
     <p>
-      <input type="checkbox">Плацкарт
-      <input type="checkbox">Купе
+      <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт</label>
+      <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
     </p>
-   
+    
     <table>
-      <tr>
-        <th class="booking ">Direction</th>
-        <th class="booking ">Date</th>
-        <th class="booking ">Seat</th>
-      </tr>
-      <tr>
-        <td>{{ direction }}</td>
-        <td>{{ choiceDate }}</td>
-        <td>{{ seat.toString() }}</td>
-      </tr>
+      <tbody>
+
+        <tr>
+          <th class="booking ">Direction</th>
+          <th class="booking ">Date</th>
+          <th class="booking ">Seat</th>
+        </tr>
+        <tr>
+          <td>{{ direction }}</td>
+          <td>{{ choiceDate }}</td>
+          <td>{{ seat.toString() }}</td>
+        </tr>
+      </tbody>
     </table>
 
     <label>Total price: {{ cost + '$' }} </label><br>
@@ -63,7 +66,7 @@
             <th class="booking">Seat</th>
           </tr>
           <tr v-for="val, key in arr" :key="key">
-            <td class="buy">{{ key.toString().split('/')[0] }}</td>
+            <td class="bu">{{ key.toString().split('/')[0] }}</td>
             <td class="buy">{{ key.toString().split('/')[1] }}</td>
             <td class="buy">{{ val.toString() }}</td>            
           </tr>
@@ -85,14 +88,15 @@ const schedule = {
 } as Record<string, string[]>
 
 const wagons = {
-  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
-  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
-  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
-  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'kupe' }],
+  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
 } as Record<string, any[]>
 
 const directions = Object.keys(schedule) as string[]
 
+const vagonType = ref('')
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
