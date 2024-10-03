@@ -31,12 +31,6 @@
     </div>
 
     <p>
-<<<<<<< HEAD
-      <input type="checkbox" v-model="platzcart">Плацкарт
-      <input type="checkbox" v-model="cupe">Купе
-    </p>
-
-=======
       <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт</label>
       <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
     </p>
