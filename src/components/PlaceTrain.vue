@@ -10,6 +10,10 @@
     <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
 
+    <p>
+      <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт</label>
+      <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
+    </p>
     <div v-if="schedule[direction]?.includes(choiceDate)">
       <p>
         <template v-for="i of 28" :key="i">
@@ -30,11 +34,7 @@
       <span>На выбранную дату нет поездов</span>
     </div>
 
-    <p>
-      <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт</label>
-      <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
-    </p>
-    
+
 
     <table>
       <tbody>
@@ -52,10 +52,10 @@
       </tbody>
     </table>
 
-    <label>Total price: {{ cost + '$' }} </label><br>
-    <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
+      <label>Total price: {{ cost + '$' }} </label><br>   
+    
+      <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
     <hr>
-
 
     <div>
       <h3>Buy Tickets</h3>
@@ -79,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+
 import { ref, computed } from 'vue'
 
 const schedule = {
@@ -102,11 +103,13 @@ const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
 const costSeat = 124
-const platzcart = ref()
 const cupe = ref()
-const cost = computed(() => {  
-  return costSeat * seat.value.length 
-})
+const platzcart = ref()
+
+  const cost = computed(() => {
+    return costSeat * seat.value.length
+  })
+
 
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
@@ -127,6 +130,8 @@ const addTicket = () => {
   direction.value = ''
   choiceDate.value = ''
 }
+
+
 
 </script>
 
