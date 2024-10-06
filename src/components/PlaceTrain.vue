@@ -2,18 +2,15 @@
 
   <div
     style="background-color: gainsboro; padding-top: 20px;border: 1px solid gray; margin: 20px 60px; border-radius: 4px;">
-    <span style="padding-right: 10px;">Direction:</span>
+    <span style="padding-right: 10px;">Направление</span>
     <select style="width: 220px;" v-model="direction">
       <option v-for="val of directions" :key="val" :value="val">{{ val }}</option>
     </select>
-    <label for="trainDate" style="padding: 0 12px;">Date:</label>
+    <label for="trainDate" style="padding: 0 12px;">Дата</label>
     <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
 
-    <p>
-      <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт</label>
-      <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе</label>
-    </p>
+
     <div v-if="schedule[direction]?.includes(choiceDate)">
       <p>
         <template v-for="i of 28" :key="i">
@@ -40,9 +37,9 @@
       <tbody>
 
         <tr>
-          <th class="booking ">Direction</th>
-          <th class="booking ">Date</th>
-          <th class="booking ">Seat</th>
+          <th class="booking ">Направление</th>
+          <th class="booking ">Дата</th>
+          <th class="booking ">Место</th>
         </tr>
         <tr>
           <td>{{ direction }}</td>
@@ -52,19 +49,22 @@
       </tbody>
     </table>
 
-      <label>Total price: {{ cost + '$' }} </label><br>   
-    
-      <button @click="addTicket" style="width: 100px; border: 2px solid black;">Book</button><br>
+    <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт {{ cost + '₽' }}</label>
+    <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе {{ cost*2 + '₽' }}</label>
+
+    <div>Стоимость {{  '₽'}}</div><br>
+
+    <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
     <hr>
 
     <div>
-      <h3>Buy Tickets</h3>
+      <h3>Купленные билеты</h3>
       <table>
         <tbody>
           <tr>
-            <th class="booking">Direction</th>
-            <th class="booking">Date</th>
-            <th class="booking">Seat</th>
+            <th class="booking">Направление</th>
+            <th class="booking">Дата</th>
+            <th class="booking">Место</th>
           </tr>
           <tr v-for="val, key in arr" :key="key">
             <td class="buy">{{ key.toString().split('/')[0] }}</td>
@@ -106,9 +106,11 @@ const costSeat = 124
 const cupe = ref()
 const platzcart = ref()
 
-  const cost = computed(() => {
-    return costSeat * seat.value.length
-  })
+const cost = computed(() => {
+  return costSeat * seat.value.length
+})
+
+
 
 
 
