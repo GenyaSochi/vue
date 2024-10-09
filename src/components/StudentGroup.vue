@@ -135,9 +135,7 @@ const saveInfo = () => {
 </script>
 
 <style scoped>
-.view {
-  width: 700px;
-  height: 300px;
+.view {  
   margin-top: 20px;
   padding-top: 20px;
   background-color: rgb(223, 216, 216);

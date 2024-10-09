@@ -50,9 +50,9 @@
     </table>
 
     <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт {{ cost + '₽' }}</label>
-    <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе {{ cost*2 + '₽' }}</label>
+    <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе {{ cost + '₽' }}</label>
 
-    <div>Стоимость {{  '₽'}}</div><br>
+    <div>Стоимость {{ '₽' }}</div><br>
 
     <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
     <hr>
@@ -102,12 +102,18 @@ const vagonType = ref('')
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
-const costSeat = 124
-const cupe = ref()
-const platzcart = ref()
+// const costSeat = 124
+const costCupe = 162
+const costPlatzcart = 124
+const cupe = ref('')
+const platzcart = ref('')
 
 const cost = computed(() => {
-  return costSeat * seat.value.length
+ if(!platzcart.value)
+ {
+   return costCupe * seat.value.length  
+ }else(!cupe.value)
+ return costPlatzcart * seat.value.length  
 })
 
 
