@@ -49,10 +49,11 @@
       </tbody>
     </table>
 
-    <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт {{ cost + '₽' }}</label>
-    <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе {{ cost + '₽' }}</label>
+    <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт {{ costPlatzcart + '₽'
+      }}</label>
+    <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе {{ costCupe + '₽' }}</label>
 
-    <div>Стоимость {{ '₽' }}</div><br>
+    <div>Стоимость {{ cost + '₽' }}</div><br>
 
     <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
     <hr>
@@ -109,16 +110,11 @@ const cupe = ref('')
 const platzcart = ref('')
 
 const cost = computed(() => {
- if(!platzcart.value)
- {
-   return costCupe * seat.value.length  
- }else(!cupe.value)
- return costPlatzcart * seat.value.length  
+  if (vagonType.value = platzcart.value) {
+    return costPlatzcart * seat.value.length
+  } else (vagonType.value = cupe.value)
+  return costCupe * seat.value.length
 })
-
-
-
-
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
 const arr = ref(tikets as any)
