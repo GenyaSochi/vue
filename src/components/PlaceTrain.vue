@@ -10,18 +10,35 @@
     <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
 
+    <!-- <div>
     <div class="wagon">Выберите тип вагона
       <div>
-        <input type="radio" id="pl" value="platzcart" v-model="wagonType"><label for="pl">Плацкарт {{ costSeat +
+        <input type="radio" id="pl" value="platzcart" v-model="wagons"><label for="pl">Плацкарт {{ costSeat +
           '₽'
           }}</label>
       </div>
       <div>
-        <input type="radio" id="cp" value="cupe" v-model="wagonType"><label for="cp">Купе {{ costSeat + 40 + '₽' }}</label>
+        <input type="radio" id="cp" value="cupe" v-model="wagons"><label for="cp">Купе {{ costSeat + 40 + '₽' }}</label>
       </div>
     </div>
+  </div> -->
 
-  
+
+
+    <div class="wagon" v-for="wagon of wagons">Выберите тип вагона
+      <div>
+        <template v-for="num of wagon" :key="num">
+          <input type="radio"  id="pl" value="platzcart" v-model="wagons"><label for="pl">Плацкарт {{ costSeat +'₽' }}</label>
+        </template>
+      </div>
+      <div>
+        <template v-for="num of wagon" :key="num">
+          <input type="radio" id="cp" value="cupe" v-model="wagons"><label for="cp">Купе {{ costSeat + 40 + '₽' }}</label>
+        </template>
+      </div>
+
+    </div>
+
 
     <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
     <hr>
