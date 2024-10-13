@@ -10,6 +10,21 @@
     <input type="date" v-model="choiceDate" style="margin-right: 40px;">
     <hr style="width: 90%;">
 
+    <div class="wagon">Выберите тип вагона
+      <div>
+        <input type="radio" id="pl" value="platzcart" v-model="wagonType"><label for="pl">Плацкарт {{ costSeat +
+          '₽'
+          }}</label>
+      </div>
+      <div>
+        <input type="radio" id="cp" value="cupe" v-model="wagonType"><label for="cp">Купе {{ costSeat + 40 + '₽' }}</label>
+      </div>
+    </div>
+
+  
+
+    <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
+    <hr>
 
     <div v-if="schedule[direction]?.includes(choiceDate)">
       <p>
@@ -31,11 +46,8 @@
       <span>На выбранную дату нет поездов</span>
     </div>
 
-
-
     <table>
       <tbody>
-
         <tr>
           <th class="booking ">Направление</th>
           <th class="booking ">Дата</th>
@@ -49,13 +61,7 @@
       </tbody>
     </table>
 
-    <input type="radio" id="pl" value="platzcart" v-model="vagonType"><label for="pl">Плацкарт {{ costPlatzcart + '₽'
-      }}</label>
-    <input type="radio" id="cp" value="cupe" v-model="vagonType"><label for="cp">Купе {{ costCupe + '₽' }}</label>
-
-    <div>Стоимость {{ cost + '₽' }}</div><br>
-
-    <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
+    <div>Стоимость проезда {{ cost + '₽' }}</div><br>
     <hr>
 
     <div>
@@ -77,6 +83,7 @@
     </div>
   </div>
 
+
 </template>
 
 <script setup lang="ts">
@@ -84,7 +91,7 @@
 import { ref, computed } from 'vue'
 
 const schedule = {
-  'Москва-Сочи': ['2024-10-02', '2024-10-04', '2024-10-06'],
+  'Москва-Сочи': ['2024-10-02', '2024-10-04', '2024-10-06',],
   'Сочи-Москва': ['2024-10-02', '2024-10-04', '2024-10-06'],
   'Екатеринбург-Уфа': ['2024-10-03', '2024-10-05', '2024-10-07'],
   'Уфа-Екатеринбург': ['2024-10-03', '2024-10-05', '2024-10-07'],
@@ -99,21 +106,19 @@ const wagons = {
 
 const directions = Object.keys(schedule) as string[]
 
-const vagonType = ref('')
+const wagonType = ref('')
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
 const seat = ref([])
-// const costSeat = 124
-const costCupe = 162
-const costPlatzcart = 124
+const costSeat = 124
 const cupe = ref('')
 const platzcart = ref('')
 
 const cost = computed(() => {
-  if (vagonType.value = platzcart.value) {
-    return costPlatzcart * seat.value.length
-  } else (vagonType.value = cupe.value)
-  return costCupe * seat.value.length
+  if (wagonType.value = platzcart.value) {
+    return costSeat * seat.value.length
+  } else (wagonType.value = cupe.value)
+  return costSeat * seat.value.length
 })
 
 const tikets = localStorage.tikets ? JSON.parse(localStorage.tikets) : {} as any
@@ -135,8 +140,6 @@ const addTicket = () => {
   choiceDate.value = ''
 }
 
-
-
 </script>
 
 
@@ -144,5 +147,12 @@ const addTicket = () => {
 .booking,
 .buy {
   padding: 0 20px;
+}
+
+.wagon {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  gap: 10px;
 }
 </style>
