@@ -24,22 +24,12 @@
   </div> -->
 
 
-
-    <div class="wagon" v-for="wagon of wagons">Выберите тип вагона
-      <div>
-        <template v-for="num of wagon" :key="num">
-          <input type="radio"  id="pl" value="platzcart" v-model="wagons"><label for="pl">Плацкарт {{ costSeat +'₽' }}</label>
-        </template>
-      </div>
-      <div>
-        <template v-for="num of wagon" :key="num">
-          <input type="radio" id="cp" value="cupe" v-model="wagons"><label for="cp">Купе {{ costSeat + 40 + '₽' }}</label>
-        </template>
-      </div>
-
+  <!-- <div class="wagon" v-if="wagons[direction]?.includes(num.value)">Выберите тип вагона -->
+    Выберите num вагона
+    <div class="wagon" v-for="wagon,index of wagons[direction]">
+      <input type="radio" :id="'pl'+index" :value="wagon.num" v-model="wagonNum"><label :for="'pl'+index"> {{ wagon.num }} {{ wagon.type }}</label>
     </div>
-
-
+    {{ wagonNum }}
     <button @click="addTicket" style="width: 100px; border: 2px solid black;">Купить</button><br>
     <hr>
 
@@ -99,8 +89,6 @@
       </table>
     </div>
   </div>
-
-
 </template>
 
 <script setup lang="ts">
@@ -115,7 +103,7 @@ const schedule = {
 } as Record<string, string[]>
 
 const wagons = {
-  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
+  'Москва-Сочи': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' },{ num: 3, type: 'platzcart' }, { num: 4, type: 'cupe' }],
   'Сочи-Москва': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
   'Екатеринбург-Уфа': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
   'Уфа-Екатеринбург': [{ num: 1, type: 'platzcart' }, { num: 2, type: 'cupe' }],
@@ -123,6 +111,7 @@ const wagons = {
 
 const directions = Object.keys(schedule) as string[]
 
+const wagonNum = ref(0)
 const wagonType = ref('')
 const direction = ref(directions[0])
 const choiceDate = ref((new Date()).toLocaleDateString().split('.').reverse().join('-'))
